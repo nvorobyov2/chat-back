@@ -5,8 +5,6 @@ var app = express();
 var http = require('http');
 var server = http.Server(app);
 
-app.use(express.static('client'));
-
 server.listen(PORT, function() {
   console.log('Chat server running');
 });
@@ -18,3 +16,7 @@ io.on('connection', function(socket) {
     io.emit('message', msg);
   });
 });
+
+app.get('/', (req, res) => {
+  res.send('Бэкенд чата включен');
+})
