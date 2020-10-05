@@ -12,16 +12,11 @@ server.listen(PORT, function() {
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-  console.log('Подключился ' + socket.handshake.query.userName);
-  const p = document.createElement('p');
-  p.textContent = 'Подключился ' + socket.handshake.query.userName;
-  document.getElementById('log').appendChild(p);
+  const userName = socket.handshake.query.userName;
+  console.log('Подключился ' + userName);
 
   socket.on('disconnect', () => {
-    console.log('Отключился ' + socket.handshake.query.userName);
-    const p = document.createElement('p');
-    p.textContent = 'Отключился ' + socket.handshake.query.userName;
-    document.getElementById('log').appendChild(p);
+    console.log('Отключился ' + userName);
   })
 
   socket.on('message', function(msg) {
