@@ -12,11 +12,23 @@ server.listen(PORT, function() {
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
+  console.log('Подключился ' + socket.handshake.query.userName);
+  const p = document.createElement('p');
+  p.textContent = 'Подключился ' + socket.handshake.query.userName;
+  document.getElementById('log').appendChild(p);
+
+  socket.on('disconnect', () => {
+    console.log('Отключился ' + socket.handshake.query.userName);
+    const p = document.createElement('p');
+    p.textContent = 'Отключился ' + socket.handshake.query.userName;
+    document.getElementById('log').appendChild(p);
+  })
+
   socket.on('message', function(msg) {
     io.emit('message', msg);
   });
 });
 
 app.get('/', (req, res) => {
-  res.send('Бэкенд чата включен');
+  res.sendFile(index.html);
 })
