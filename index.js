@@ -18,15 +18,15 @@ io.use(async (socket, next) => {
   } catch (err) {}
 });
 
-let log;
+let log = '';
 
 io.on('connection', function(socket) {
   console.log('Подключился ' + socket.userName);
-  log = '<p>Подключился ' + socket.userName + '</p>';
+  log += '<p>Подключился ' + socket.userName + '</p>';
 
   socket.on('disconnect', () => {
     console.log('Отключился ' + socket.userName);
-    log = '<p>Отключился ' + socket.userName + '</p>';
+    log += '<p>Отключился ' + socket.userName + '</p>';
   })
 
   socket.on('message', function(msg) {
