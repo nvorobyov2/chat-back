@@ -9,7 +9,7 @@ server.listen(PORT, function() {
   console.log('Chat server running');
 });
 
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
 
 io.use(async (socket, next) => {
   try {
