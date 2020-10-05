@@ -31,5 +31,5 @@ io.on('connection', function(socket) {
 });
 
 app.get('/', (req, res) => {
-  res.send(Лог чата);
+  res.send('Лог чата');
 })
