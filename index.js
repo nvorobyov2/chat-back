@@ -20,6 +20,7 @@ io.use(async (socket, next) => {
 
 io.on('connection', function(socket) {
   console.log('Подключился ' + socket.userName);
+  console.log(window.document.getElementById('log'));
 
   socket.on('disconnect', () => {
     console.log('Отключился ' + socket.userName);
@@ -31,5 +32,5 @@ io.on('connection', function(socket) {
 });
 
 app.get('/', (req, res) => {
-  res.send('Лог чата');
+  res.send("Лог чата <div id='log'></div>");
 })
