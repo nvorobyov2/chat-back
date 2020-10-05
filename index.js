@@ -22,10 +22,11 @@ let log;
 
 io.on('connection', function(socket) {
   console.log('Подключился ' + socket.userName);
-  log = 'connect';
+  log = '<p>Подключился ' + socket.userName + '</p>';
 
   socket.on('disconnect', () => {
     console.log('Отключился ' + socket.userName);
+    log = '<p>Отключился ' + socket.userName + '</p>';
   })
 
   socket.on('message', function(msg) {
@@ -34,5 +35,5 @@ io.on('connection', function(socket) {
 });
 
 app.get('/', (req, res) => {
-  res.send(log);
+  res.send('<p>Лог чата</p>' + log);
 })
