@@ -11,12 +11,18 @@ server.listen(PORT, function() {
 
 var io = require('socket.io')(server);
 
+io.use(async (socket, next) => {
+  try {
+    socket.userName = socket.handshake.query.userName;
+    next();
+  } catch (err) {}
+});
+
 io.on('connection', function(socket) {
-  const userName = socket.handshake.query.userName;
-  console.log('Подключился ' + userName);
+  console.log('Подключился ' + socket.userName);
 
   socket.on('disconnect', () => {
-    console.log('Отключился ' + userName);
+    console.log('Отключился ' + socket.userName);
   })
 
   socket.on('message', function(msg) {
@@ -25,5 +31,5 @@ io.on('connection', function(socket) {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(index.html);
+  res.send(Лог чата);
 })
